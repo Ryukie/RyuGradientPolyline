@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="W9s-Fg-Fhr">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEB-4g-YcW">
+                                <rect key="frame" x="82" y="510" width="60" height="30"/>
+                                <state key="normal" title="开始追踪"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBm-Vb-MKf">
+                                <rect key="frame" x="10" y="510" width="30" height="30"/>
+                                <state key="normal" title="定位"/>
+                                <connections>
+                                    <action selector="startLocate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iVu-9g-iWy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApB-Iu-hFo">
+                                <rect key="frame" x="162" y="510" width="60" height="30"/>
+                                <state key="normal" title="停止追踪"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XEl-ZL-4OT">
+                                <rect key="frame" x="243" y="510" width="60" height="30"/>
+                                <state key="normal" title="继续追踪"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ApB-Iu-hFo" firstAttribute="centerY" secondItem="KEB-4g-YcW" secondAttribute="centerY" id="A8t-DB-5Kz"/>
+                            <constraint firstItem="KEB-4g-YcW" firstAttribute="leading" secondItem="MBm-Vb-MKf" secondAttribute="trailing" constant="42" id="J8K-D6-VIw"/>
+                            <constraint firstItem="MBm-Vb-MKf" firstAttribute="top" secondItem="W9s-Fg-Fhr" secondAttribute="bottom" constant="10" id="K57-3R-hMW"/>
+                            <constraint firstItem="MBm-Vb-MKf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="MGD-86-gA7"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="W9s-Fg-Fhr" secondAttribute="bottom" constant="100" id="PTa-KS-b4r"/>
+                            <constraint firstAttribute="trailing" secondItem="W9s-Fg-Fhr" secondAttribute="trailing" id="S5a-3a-QXh"/>
+                            <constraint firstItem="KEB-4g-YcW" firstAttribute="top" secondItem="MBm-Vb-MKf" secondAttribute="top" id="ZP8-RL-nva"/>
+                            <constraint firstItem="W9s-Fg-Fhr" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cT3-rs-rZ9"/>
+                            <constraint firstItem="XEl-ZL-4OT" firstAttribute="leading" secondItem="ApB-Iu-hFo" secondAttribute="trailing" constant="21" id="fhB-7t-poS"/>
+                            <constraint firstItem="ApB-Iu-hFo" firstAttribute="leading" secondItem="KEB-4g-YcW" secondAttribute="trailing" constant="20" id="i04-YW-hXE"/>
+                            <constraint firstItem="W9s-Fg-Fhr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iIt-ff-KqF"/>
+                            <constraint firstItem="KEB-4g-YcW" firstAttribute="centerY" secondItem="MBm-Vb-MKf" secondAttribute="centerY" id="kmb-pb-cGw"/>
+                            <constraint firstItem="XEl-ZL-4OT" firstAttribute="centerY" secondItem="ApB-Iu-hFo" secondAttribute="centerY" id="saY-QH-yQJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mv_mapView" destination="W9s-Fg-Fhr" id="X7f-l9-RzE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="339" y="389"/>
+        </scene>
+    </scenes>
+</document>
