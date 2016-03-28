@@ -39,15 +39,24 @@
                                 <rect key="frame" x="243" y="510" width="60" height="30"/>
                                 <state key="normal" title="继续追踪"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Za4-06-nxx">
+                                <rect key="frame" x="10" y="540" width="75" height="30"/>
+                                <state key="normal" title="绘制多边形"/>
+                                <connections>
+                                    <action selector="drawPolygon:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tRQ-oL-Lae"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ApB-Iu-hFo" firstAttribute="centerY" secondItem="KEB-4g-YcW" secondAttribute="centerY" id="A8t-DB-5Kz"/>
                             <constraint firstItem="KEB-4g-YcW" firstAttribute="leading" secondItem="MBm-Vb-MKf" secondAttribute="trailing" constant="42" id="J8K-D6-VIw"/>
                             <constraint firstItem="MBm-Vb-MKf" firstAttribute="top" secondItem="W9s-Fg-Fhr" secondAttribute="bottom" constant="10" id="K57-3R-hMW"/>
+                            <constraint firstItem="Za4-06-nxx" firstAttribute="top" secondItem="MBm-Vb-MKf" secondAttribute="bottom" id="KlQ-Wz-KhT"/>
                             <constraint firstItem="MBm-Vb-MKf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="MGD-86-gA7"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="W9s-Fg-Fhr" secondAttribute="bottom" constant="100" id="PTa-KS-b4r"/>
                             <constraint firstAttribute="trailing" secondItem="W9s-Fg-Fhr" secondAttribute="trailing" id="S5a-3a-QXh"/>
+                            <constraint firstItem="Za4-06-nxx" firstAttribute="leading" secondItem="MBm-Vb-MKf" secondAttribute="leading" id="VaN-HE-D2O"/>
                             <constraint firstItem="KEB-4g-YcW" firstAttribute="top" secondItem="MBm-Vb-MKf" secondAttribute="top" id="ZP8-RL-nva"/>
                             <constraint firstItem="W9s-Fg-Fhr" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cT3-rs-rZ9"/>
                             <constraint firstItem="XEl-ZL-4OT" firstAttribute="leading" secondItem="ApB-Iu-hFo" secondAttribute="trailing" constant="21" id="fhB-7t-poS"/>
