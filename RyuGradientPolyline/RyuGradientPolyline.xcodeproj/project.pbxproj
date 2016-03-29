@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4A18CC321CA932F100C75A51 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A18CC311CA932F100C75A51 /* MapKit.framework */; };
 		4A18CC341CA932F900C75A51 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A18CC331CA932F900C75A51 /* CoreLocation.framework */; };
+		4A21F9371CA9911A0095AE3F /* GradientPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A21F9341CA9911A0095AE3F /* GradientPolylineRenderer.m */; };
+		4A21F9381CA9911A0095AE3F /* GradientPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A21F9361CA9911A0095AE3F /* GradientPolylineOverlay.m */; };
 		4A6839D01CA92F25007E771C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6839CF1CA92F25007E771C /* main.m */; };
 		4A6839D31CA92F25007E771C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6839D21CA92F25007E771C /* AppDelegate.m */; };
 		4A6839D61CA92F25007E771C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6839D51CA92F25007E771C /* ViewController.m */; };
@@ -20,6 +22,10 @@
 /* Begin PBXFileReference section */
 		4A18CC311CA932F100C75A51 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4A18CC331CA932F900C75A51 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4A21F9331CA9911A0095AE3F /* GradientPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineRenderer.h; sourceTree = "<group>"; };
+		4A21F9341CA9911A0095AE3F /* GradientPolylineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineRenderer.m; sourceTree = "<group>"; };
+		4A21F9351CA9911A0095AE3F /* GradientPolylineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineOverlay.h; sourceTree = "<group>"; };
+		4A21F9361CA9911A0095AE3F /* GradientPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineOverlay.m; sourceTree = "<group>"; };
 		4A6839CB1CA92F25007E771C /* RyuGradientPolyline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RyuGradientPolyline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6839CF1CA92F25007E771C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4A6839D11CA92F25007E771C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -54,6 +60,17 @@
 			name = Framework;
 			sourceTree = "<group>";
 		};
+		4A21F92C1CA9898A0095AE3F /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				4A21F9331CA9911A0095AE3F /* GradientPolylineRenderer.h */,
+				4A21F9341CA9911A0095AE3F /* GradientPolylineRenderer.m */,
+				4A21F9351CA9911A0095AE3F /* GradientPolylineOverlay.h */,
+				4A21F9361CA9911A0095AE3F /* GradientPolylineOverlay.m */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
 		4A6839C21CA92F25007E771C = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +91,7 @@
 		4A6839CD1CA92F25007E771C /* RyuGradientPolyline */ = {
 			isa = PBXGroup;
 			children = (
+				4A21F92C1CA9898A0095AE3F /* Tools */,
 				4A6839D11CA92F25007E771C /* AppDelegate.h */,
 				4A6839D21CA92F25007E771C /* AppDelegate.m */,
 				4A6839D41CA92F25007E771C /* ViewController.h */,
@@ -168,6 +186,8 @@
 			files = (
 				4A6839D61CA92F25007E771C /* ViewController.m in Sources */,
 				4A6839D31CA92F25007E771C /* AppDelegate.m in Sources */,
+				4A21F9381CA9911A0095AE3F /* GradientPolylineOverlay.m in Sources */,
+				4A21F9371CA9911A0095AE3F /* GradientPolylineRenderer.m in Sources */,
 				4A6839D01CA92F25007E771C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

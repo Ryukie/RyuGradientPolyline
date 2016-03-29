@@ -23,6 +23,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEB-4g-YcW">
                                 <rect key="frame" x="82" y="510" width="60" height="30"/>
                                 <state key="normal" title="开始追踪"/>
+                                <connections>
+                                    <action selector="startTrack:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TUy-ek-ibz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBm-Vb-MKf">
                                 <rect key="frame" x="10" y="510" width="30" height="30"/>
@@ -34,10 +37,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApB-Iu-hFo">
                                 <rect key="frame" x="162" y="510" width="60" height="30"/>
                                 <state key="normal" title="停止追踪"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XEl-ZL-4OT">
-                                <rect key="frame" x="243" y="510" width="60" height="30"/>
-                                <state key="normal" title="继续追踪"/>
+                                <connections>
+                                    <action selector="endTrack:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UPm-ue-RjL"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Za4-06-nxx">
                                 <rect key="frame" x="10" y="540" width="75" height="30"/>
@@ -46,10 +48,32 @@
                                     <action selector="drawPolygon:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tRQ-oL-Lae"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yY9-FG-Mxw">
+                                <rect key="frame" x="20" y="20" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdM-yv-nFV">
+                                <rect key="frame" x="20" y="49" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XEl-ZL-4OT">
+                                <rect key="frame" x="243" y="510" width="60" height="30"/>
+                                <state key="normal" title="暂停追踪"/>
+                                <connections>
+                                    <action selector="pauseTrack:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l3n-1c-SOx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="qdM-yv-nFV" firstAttribute="leading" secondItem="yY9-FG-Mxw" secondAttribute="leading" id="8P2-MW-MXf"/>
                             <constraint firstItem="ApB-Iu-hFo" firstAttribute="centerY" secondItem="KEB-4g-YcW" secondAttribute="centerY" id="A8t-DB-5Kz"/>
+                            <constraint firstItem="qdM-yv-nFV" firstAttribute="top" secondItem="yY9-FG-Mxw" secondAttribute="bottom" constant="8" id="EuY-fo-eZf"/>
+                            <constraint firstItem="yY9-FG-Mxw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="J23-QA-WcJ"/>
                             <constraint firstItem="KEB-4g-YcW" firstAttribute="leading" secondItem="MBm-Vb-MKf" secondAttribute="trailing" constant="42" id="J8K-D6-VIw"/>
                             <constraint firstItem="MBm-Vb-MKf" firstAttribute="top" secondItem="W9s-Fg-Fhr" secondAttribute="bottom" constant="10" id="K57-3R-hMW"/>
                             <constraint firstItem="Za4-06-nxx" firstAttribute="top" secondItem="MBm-Vb-MKf" secondAttribute="bottom" id="KlQ-Wz-KhT"/>
@@ -63,11 +87,14 @@
                             <constraint firstItem="ApB-Iu-hFo" firstAttribute="leading" secondItem="KEB-4g-YcW" secondAttribute="trailing" constant="20" id="i04-YW-hXE"/>
                             <constraint firstItem="W9s-Fg-Fhr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iIt-ff-KqF"/>
                             <constraint firstItem="KEB-4g-YcW" firstAttribute="centerY" secondItem="MBm-Vb-MKf" secondAttribute="centerY" id="kmb-pb-cGw"/>
+                            <constraint firstItem="yY9-FG-Mxw" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="rUE-NA-tWF"/>
                             <constraint firstItem="XEl-ZL-4OT" firstAttribute="centerY" secondItem="ApB-Iu-hFo" secondAttribute="centerY" id="saY-QH-yQJ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mv_mapView" destination="W9s-Fg-Fhr" id="X7f-l9-RzE"/>
+                        <outlet property="signal" destination="yY9-FG-Mxw" id="0RI-6Q-J3x"/>
+                        <outlet property="state" destination="qdM-yv-nFV" id="zhV-jQ-OMz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -9,78 +9,134 @@
 #import "ViewController.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "GradientPolylineOverlay.h"
+#import "GradientPolylineRenderer.h"
 
+static int MAX_LOCATIONS = 3000;
 
-@interface ViewController ()<MKMapViewDelegate>
+@interface ViewController ()<MKMapViewDelegate,CLLocationManagerDelegate>{
+    //    CLLocationCoordinate2D *allLocations;
+    //    float *allSpeed;
+    //    int locationCount;
+}
 @property (weak, nonatomic) IBOutlet MKMapView *mv_mapView;
 @property (nonatomic,strong) CLLocationManager *locateManager;
 @property (nonatomic,strong) MKPolygon *polygon;//绘制多边形
+@property (weak, nonatomic) IBOutlet UILabel *signal;
+@property (weak, nonatomic) IBOutlet UILabel *state;
+
+
+@property (nonatomic,strong) NSArray *allLocationArr;
+@property (nonatomic,strong) NSMutableArray *tempA;
+
+@property (nonatomic,strong) GradientPolylineOverlay *polyline;
+
+
+
+
 @end
 
 @implementation ViewController
+
 - (CLLocationManager *)locateManager {
     if (!_locateManager) {
         _locateManager = [[CLLocationManager alloc] init];
     }
     return  _locateManager;
 }
+- (NSArray *)allLocationArr {
+    if (!_allLocationArr) {
+        _allLocationArr = [NSArray array];
+    }
+    return _allLocationArr;
+}
+- (NSMutableArray *)tempA {
+    if (!_tempA) {
+        _tempA = [NSMutableArray array];
+    }
+    return _tempA;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     _mv_mapView.delegate = self;//设置地图代理
-    [self startLocate:nil];
-}
-- (IBAction)startLocate:(id)sender {
     //始终获取定位
     [self.locateManager requestAlwaysAuthorization];
-    
+    self.locateManager.delegate = self;
+    self.locateManager.desiredAccuracy = kCLLocationAccuracyBest;
     //定位  corelocation
     //设置定位模式
-    /*
-     MKUserTrackingModeNone = 0, // the user's location is not followed
-     MKUserTrackingModeFollow, // the map follows the user's location
-     MKUserTrackingModeFollowWithHeading,
-     */
     self.mv_mapView.userTrackingMode = MKUserTrackingModeFollow;
     //设置地图显示类型
-    /*
-     MKMapTypeStandard = 0,
-     MKMapTypeSatellite,
-     MKMapTypeHybrid,
-     MKMapTypeSatelliteFlyover NS_ENUM_AVAILABLE(10_11, 9_0),
-     MKMapTypeHybridFlyover NS_ENUM_AVAILABLE(10_11, 9_0),
-     */
     self.mv_mapView.mapType = MKMapTypeStandard;
+    
+    self.signal.backgroundColor = [UIColor grayColor];
 }
+- (IBAction)startLocate:(id)sender {
+    
+}
+- (IBAction)startTrack:(id)sender {
+    [self.locateManager startUpdatingLocation];
+}
+- (IBAction)pauseTrack:(id)sender {
+    [self.locateManager stopUpdatingLocation];
+}
+- (IBAction)endTrack:(id)sender {
+    [self.locateManager stopUpdatingLocation];
+    
+    CLLocationCoordinate2D *points;
+    float *velocity;
+    points = malloc(sizeof(CLLocationCoordinate2D)*MAX_LOCATIONS);
+    velocity = malloc(sizeof(float)*MAX_LOCATIONS);
+    NSLog(@"%ld",self.allLocationArr.count);
+    [self.allLocationArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        CLLocation *location = obj;
+        velocity[idx] = location.speed;
+        NSLog(@"%lf",location.speed);
+        points[idx] = location.coordinate;
+    }];
+    self.polyline = [[GradientPolylineOverlay alloc] initWithPoints:points velocity:velocity count:self.allLocationArr.count];
+    [self.mv_mapView addOverlay:self.polyline];
+}
+
 - (IBAction)drawPolygon:(id)sender {
+
+}
+#pragma mark - locationManager delegate
+-(void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation *location = (CLLocation*)locations.lastObject;
+    if (location.horizontalAccuracy < 0)
+    {
+        self.signal.text = @"No Singal";
+        self.signal.textColor = [UIColor redColor];
+    }
+    else if (location.horizontalAccuracy > 163)
+    {
+        self.signal.text = @"POOR";
+        self.signal.textColor = [UIColor orangeColor];
+    }
+    else if (location.horizontalAccuracy > 48)
+    {
+        self.signal.text = @"AVERAGE";
+        self.signal.textColor = [UIColor yellowColor];
+    }
+    else
+    {
+        self.signal.text = @"STRONG";
+        self.signal.textColor = [UIColor greenColor];
+    }
     
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(23.29043, 112.81630), 500, 500);
-    [_mv_mapView setRegion:region];
+    NSString *str = [NSString stringWithFormat:@"%lf,%lf,%lf",location.coordinate.longitude,location.coordinate.latitude,location.speed];
+    self.state.text = str;
     
-    
-    CLLocationCoordinate2D points[4];//NSArry 只能存放OC对象   这里用MKPoint就可以用了
-    CLLocationCoordinate2D lt = CLLocationCoordinate2DMake(23.29131,112.8155);
-    CLLocationCoordinate2D rt = CLLocationCoordinate2DMake(23.29061, 112.8177);
-    CLLocationCoordinate2D lb = CLLocationCoordinate2DMake(23.29014, 112.8151);
-    CLLocationCoordinate2D rb = CLLocationCoordinate2DMake(23.28949, 112.8173);
-    points[0] = lt;
-    points[1] = rt;
-    points[2] = rb;
-    points[3] = lb;//需要注意顺序
-    
-    self.polygon = [MKPolygon polygonWithCoordinates:points count:4];
-    //    [MKPolygon polygonWithPoints:<#(nonnull MKMapPoint *)#> count:<#(NSUInteger)#>]
-    NSLog(@"%@",self.polygon);
-    [self.mv_mapView addOverlay:_polygon level:MKOverlayLevelAboveLabels];
-    //MKOverlayLevelAboveRoads = 0, // note that labels include shields and point of interest icons.
-    //    MKOverlayLevelAboveLabels
+    [self.tempA addObject:location];
+    self.allLocationArr = self.tempA.copy;
 }
 #pragma mark - Ryukie:MapView 绘制蒙版的代理
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
-    UIColor* purpleColor = [UIColor colorWithRed:0.149f green:0.0f blue:0.40f alpha:0.5f];
-    MKPolygonRenderer *polygonRenderer = [[MKPolygonRenderer alloc] initWithOverlay:overlay];
-    polygonRenderer.fillColor = purpleColor;
-    return polygonRenderer;
+    GradientPolylineRenderer *polylineRenderer = [[GradientPolylineRenderer alloc] initWithOverlay:overlay];
+    polylineRenderer.lineWidth = 8.0f;
+    return polylineRenderer;
 }
 
 @end
